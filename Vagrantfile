@@ -1,7 +1,7 @@
 Vagrant::Config.run do |config|
-  sshdir = "/Users/bcwaldon/.ssh/"
-  cachedir = "/Users/bcwaldon/projects/vagrant/devstack/cache/"
-  checkout = "/Users/bcwaldon/projects/openstack-cookbooks"
+  sshdir = "~/.ssh/"
+  cachedir = "cache/"
+  checkout = "openstack-cookbooks/"
   ip_prefix = "192.168.27."
   mac_prefix = "080027027"
   suffix = "100"
