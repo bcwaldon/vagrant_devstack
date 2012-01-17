@@ -35,10 +35,7 @@ Vagrant::Config.run do |config|
           :public_interface => "eth1",
           :floating_range => "#{ip_prefix}128/28",
           :host_ip => ip,
-          :nova_repo => "http://github.com/bcwaldon/nova.git",
-          :nova_branch => "volume-policy"
-#          :nova_repo => "https://review.openstack.org/p/openstack/nova",
-#          :nova_branch => "refs/changes/43/2943/5"
+          :localrc => IO.read("localrc")
         }
       },
     })
