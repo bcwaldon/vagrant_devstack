@@ -1,2 +1,4 @@
 localrc
 .vagrant
+cache
+openstack-cookbooks
