@@ -1,19 +1,28 @@
 Vagrant::Config.run do |config|
-  sshdir = "~/.ssh/"
-  cachedir = "cache/"
-  checkout = "openstack-cookbooks/"
+
+  config.vm.box = "oneiric"
+  config.vm.box_url = "http://images.ansolabs.com/vagrant/oneiric64.box"
+
+  config.vm.customize ["modifyvm", :id, "--memory", "2048"]
+
   ip_prefix = "192.168.27."
   mac_prefix = "080027027"
   suffix = "100"
   ip = "#{ip_prefix}#{suffix}"
-  config.vm.box = "oneiric"
-  config.vm.box_url = "http://images.ansolabs.com/vagrant/oneiric64.box"
-  config.vm.customize do |vm|
-    vm.memory_size = 2048
-  end
-  config.vm.network(ip, :mac => "#{mac_prefix}#{suffix}")
-  config.vm.share_folder("v-cache", "/home/vagrant/cache", cachedir, :nfs => true)
+  mac = "#{mac_prefix}#{suffix}"
+
+  Vagrant::Config.run do |config|
+    config.vm.network(:hostonly, ip, :mac => mac)
+  end 
+
+  cachedir = "cache/"
+  config.vm.share_folder("v-cache", "/home/vagrant/cache", cachedir, 
+                         :nfs => true)
+
+  sshdir = "~/.ssh/"
   config.vm.share_folder("v-ssh", "/home/vagrant/.host-ssh", sshdir)
+
+  checkout = "openstack-cookbooks/"
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "#{checkout}/cookbooks"
     chef.roles_path = "#{checkout}/roles"
@@ -22,7 +31,6 @@ Vagrant::Config.run do |config|
       "recipe[anso::cache]",
       "recipe[nova::hostname]",
       "recipe[nova::source]",
-      #"recipe[anso::settings]", # vim / screen / git settings for testing
     ]
     chef.json.merge!({
       :nova => {
