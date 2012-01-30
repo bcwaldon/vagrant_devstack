@@ -1,5 +1,0 @@
-#NOVA_REPO=http://review.openstack.org/p/openstack/nova
-#NOVA_BRANCH=refs/changes/36/3236/1
-
-NOVA_REPO=http://github.com/bcwaldon/nova
-NOVA_BRANCH=libvirt-file-injection
