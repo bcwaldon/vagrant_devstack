@@ -58,9 +58,8 @@ Vagrant::Config.run do |config|
     chef.cookbooks_path = ["#{cookbooks_dir}/cookbooks", "cookbooks"]
     chef.log_level = :debug
     chef.run_list = [
-      "recipe[vagrant_devstack::cache]",
-      "recipe[nova::hostname]",
-      "recipe[nova::source]",
+      "recipe[vagrant_devstack]",
+      "recipe[devstack]",
     ]
     chef.json.merge!({
       :nova => {
