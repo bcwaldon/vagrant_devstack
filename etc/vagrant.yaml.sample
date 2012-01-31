@@ -1,7 +1,6 @@
 ip_prefix: 192.168.27
 mac_prefix: 080027027
 box_name: oneiric
-box_url: http://images.ansolabs.com/vagrant/oneiric64.box
 allocate_memory: 1024
 openstack_cookbooks_dir: openstack-cookbooks/
 cache_dir: cache/

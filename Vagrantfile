@@ -31,7 +31,6 @@ end
 Vagrant::Config.run do |config|
 
   config.vm.box = conf['box_name']
-  config.vm.box_url = conf['box_url']
 
   memory = conf['allocate_memory'].to_s()
   config.vm.customize ["modifyvm", :id, "--memory", memory]
