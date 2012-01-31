@@ -47,7 +47,8 @@ Vagrant::Config.run do |config|
   end 
 
   cache_dir = conf['cache_dir']
-  config.vm.share_folder("v-cache", "/home/vagrant/cache", cache_dir, :nfs => true)
+  config.vm.share_folder("v-cache", "/home/vagrant/cache", cache_dir, 
+                         :nfs => true)
 
   ssh_dir = conf['ssh_dir']
   config.vm.share_folder("v-ssh", "/home/vagrant/.host-ssh", ssh_dir)
@@ -65,14 +66,6 @@ Vagrant::Config.run do |config|
     chef.json.merge!({
       :nova => {
         :source => {
-          :mysql_password => "secrete",
-          :rabbit_password => "secrete",
-          :admin_password => "secrete",
-          :service_token => "secrete",
-          :flat_interface => "eth1",
-          :public_interface => "eth1",
-          :floating_range => "#{ip_prefix}.128/28",
-          :host_ip => ip,
           :localrc => localrc
         }
       },
