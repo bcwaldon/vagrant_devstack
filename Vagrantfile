@@ -55,11 +55,10 @@ Vagrant::Config.run do |config|
 
   cookbooks_dir = conf['openstack_cookbooks_dir'] 
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = "#{cookbooks_dir}/cookbooks"
-    chef.roles_path = "#{cookbooks_dir}/roles"
+    chef.cookbooks_path = ["#{cookbooks_dir}/cookbooks", "cookbooks"]
     chef.log_level = :debug
     chef.run_list = [
-      "recipe[anso::cache]",
+      "recipe[vagrant_devstack::cache]",
       "recipe[nova::hostname]",
       "recipe[nova::source]",
     ]
