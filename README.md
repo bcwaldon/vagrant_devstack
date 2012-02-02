@@ -28,7 +28,7 @@ This project depends on having an Ubuntu 11.10 image (aka 'box') available in Vi
     vagrant box add oneiric http://images.ansolabs.com/vagrant/oneiric64.box
 
 ### Step 4: Configuration
-You can set up a local config file to override the default settings used with the project. See a sample config at `etc/vagrant.yaml.sample`. Place your own copy at `etc/vagrant.yaml`, or set a custom location in the environment variable `VD_CONF`.i
+You can set up a local config file to override the default settings used with the project. See a sample config at `etc/vagrant.yaml.sample`. Place your own copy at `etc/vagrant.yaml`, or set a custom location in the environment variable `VD_CONF`.
 
 If you decide to place the cookbooks you checked out in setp 2 in a non-default location, you must set the `devstack_cookbooks_dir` attribute to point to the proper directory.
 
