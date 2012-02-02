@@ -32,9 +32,9 @@ You can set up a local yaml-formatted config file to override the default settin
 
 If you decide to place the cookbooks you checked out in step 2 in a non-default location, you must configure the `devstack_cookbooks_dir` attribute to point to the proper directory.
 
-Additionally, if the box you with to use has a different name than 'oneiric', make sure you set the `box_name` attribute in your config file.
+Additionally, if the box you wish to use has a different name than 'oneiric', make sure you set the `box_name` attribute in your config file.
 
-DevStack also allows you to define a `localrc` file. This file will be injected into your environmant and sourced before the environment is built. You can use this to override settings such as `MYSQL_PASSWORD` or `NOVA_REPO`. See http://devstack.org for more information. If you decide to create your own localrc file, place it at `etc/localrc` file or set the `VD_LOCALRC` environment variable to its location.
+DevStack itself allows you to define a `localrc` file. This file is injected into your environment and sourced before the environment is built. You can use this to override settings such as `MYSQL_PASSWORD` or `NOVA_REPO`. See http://devstack.org for more information. If you decide to create your own localrc file, place it at `etc/localrc` file or set the `VD_LOCALRC` environment variable to its location.
 
 ### Step 5: Execution
 At this point you can run `vagrant up` and ssh into your DevStack environment!
