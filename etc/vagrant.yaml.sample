@@ -2,6 +2,8 @@ ip_prefix: 192.168.27
 mac_prefix: 080027027
 box_name: oneiric
 allocate_memory: 1024
+
+# These paths are all relative to the Vagrantfile
 openstack_cookbooks_dir: openstack-cookbooks/
 cache_dir: cache/
 ssh_dir: ~/.ssh/
