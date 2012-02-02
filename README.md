@@ -1,7 +1,18 @@
 ## DevStack with Vagrant!
 
 ### Step 1: Install Vagrant
-This project officially supports Vagrant v0.9.3, but should work with any v0.9.X releases.
+Vagrant uses VirtualBox to handle all of the virtualization. Head over to `https://www.virtualbox.org/wiki/Downloads` to find the appropriate installer for your system.
+
+If you're running Mac OS X, you'll also need to install Xcode. If you're running Lion, the simplest method is to use the App Store. You can also grab the installer from `http://developer.apple.com/xcode/`. 
+
+Once you've got VirtualBox and Xcode installed, you're ready to install Vagrant. The simplest way to get Vagrant is to use ruby's gem installer:
+
+{{{
+gem update --system
+gem install vagrant
+}}}
+
+NOTE: This project officially supports Vagrant v0.9.X
 
 ### Step 2: Check Out Cookbooks
 You will need a local copy of the `devstack_cookbooks` project: 
