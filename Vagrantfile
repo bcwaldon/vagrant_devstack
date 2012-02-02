@@ -60,10 +60,12 @@ Vagrant::Config.run do |config|
       "recipe[devstack]",
     ]
     chef.json.merge!({
-      :nova => {
-        :source => {
+      :devstack => {
+          :flat_interface => "eth1",
+          :public_interface => "eth1",
+          :floating_range => "#{ip_prefix}.128/28",
+          :host_ip => ip,
           :localrc => localrc
-        }
       },
     })
   end
