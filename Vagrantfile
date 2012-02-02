@@ -5,7 +5,7 @@ conf = {
     'mac_prefix' => '080027027',
     'box_name' => 'oneiric',
     'allocate_memory' => 1024,
-    'devstack_cookbooks_dir' => nil,
+    'devstack_cookbooks_dir' => 'devstack_cookbooks/',
     'cache_dir' => 'cache/',
     'ssh_dir' => '~/.ssh/',
 }
@@ -19,13 +19,11 @@ if File.exist?(vd_conf)
 end
 
 vd_localrc = ENV.fetch('VD_LOCALRC', 'etc/localrc')
-
 if File.exist?(vd_localrc)
     localrc = IO.read(vd_localrc)
 else
     localrc = ''
 end
-
 
 Vagrant::Config.run do |config|
 
