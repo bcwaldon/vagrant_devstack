@@ -5,6 +5,7 @@ This project officially supports Vagrant v0.9.3, but should work with any v0.9.X
 
 ### Step 2: Check Out Cookbooks
 You will need a local copy of the `devstack_cookbooks` project: 
+
 `git clone http://github.com/bcwaldon/devstack_cookbooks`
 
 ### Step 3: Set up a Box
