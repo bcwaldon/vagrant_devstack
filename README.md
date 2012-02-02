@@ -12,9 +12,14 @@ Once you've got VirtualBox and Xcode installed, you're ready to install Vagrant.
 
 NOTE: This project officially supports Vagrant v0.9.X
 
-### Step 2: Check Out Cookbooks
-You will need a local copy of the `devstack_cookbooks` project :
+### Step 2: Check Out the Code
+Now would be a good time to actually check out the project :
 
+    git clone http://github.com/bcwaldon/vagrant_devstack
+
+The project also requires a local copy of the `devstack_cookbooks` project. The default location for these to live is directly inside the vagrant\_devstack directory :
+
+    cd vagrant_devstack
     git clone http://github.com/bcwaldon/devstack_cookbooks
 
 ### Step 3: Set up a Box
