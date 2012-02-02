@@ -5,7 +5,7 @@ conf = {
     'mac_prefix' => '080027027',
     'box_name' => 'oneiric',
     'allocate_memory' => 1024,
-    'openstack_cookbooks_dir' => 'openstack-cookbooks/',
+    'devstack_cookbooks_dir' => nil,
     'cache_dir' => 'cache/',
     'ssh_dir' => '~/.ssh/',
 }
@@ -53,7 +53,7 @@ Vagrant::Config.run do |config|
   ssh_dir = conf['ssh_dir']
   config.vm.share_folder("v-ssh", "/home/vagrant/.host-ssh", ssh_dir)
 
-  cookbooks_dir = conf['openstack_cookbooks_dir'] 
+  cookbooks_dir = conf['devstack_cookbooks_dir'] 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ["#{cookbooks_dir}/cookbooks", "cookbooks"]
     chef.log_level = :debug
