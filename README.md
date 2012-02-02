@@ -11,7 +11,7 @@ You will need a local copy of the `devstack_cookbooks` project:
 ### Step 3: Set up a Box
 This project depends on having an Ubuntu 11.10 box available in VirtualBox with the Guest Additions already installed. Run the following command to download a safe base box and make it availble under the name 'oneiric':
 
-`vag box add oneiric http://images.ansolabs.com/vagrant/oneiric64.box`
+`vagrant box add oneiric http://images.ansolabs.com/vagrant/oneiric64.box`
 
 If your box has a different name than 'oneiric', make sure you set the `box_name` attribute in your config file.
 
