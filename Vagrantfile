@@ -5,7 +5,7 @@ conf = {
     'mac_prefix' => '080027027',
     'box_name' => 'oneiric',
     'allocate_memory' => 1024,
-    'openstack_cookbooks_dir' => 'openstack-cookbooks/',
+    'devstack_cookbooks_dir' => 'devstack_cookbooks/',
     'cache_dir' => 'cache/',
     'ssh_dir' => '~/.ssh/',
 }
@@ -19,13 +19,11 @@ if File.exist?(vd_conf)
 end
 
 vd_localrc = ENV.fetch('VD_LOCALRC', 'etc/localrc')
-
 if File.exist?(vd_localrc)
     localrc = IO.read(vd_localrc)
 else
     localrc = ''
 end
-
 
 Vagrant::Config.run do |config|
 
@@ -53,15 +51,13 @@ Vagrant::Config.run do |config|
   ssh_dir = conf['ssh_dir']
   config.vm.share_folder("v-ssh", "/home/vagrant/.host-ssh", ssh_dir)
 
-  cookbooks_dir = conf['openstack_cookbooks_dir'] 
+  cookbooks_dir = conf['devstack_cookbooks_dir'] 
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = "#{cookbooks_dir}/cookbooks"
-    chef.roles_path = "#{cookbooks_dir}/roles"
+    chef.cookbooks_path = ["#{cookbooks_dir}/cookbooks", "cookbooks"]
     chef.log_level = :debug
     chef.run_list = [
-      "recipe[anso::cache]",
-      "recipe[nova::hostname]",
-      "recipe[nova::source]",
+      "recipe[vagrant_devstack]",
+      "recipe[devstack]",
     ]
     chef.json.merge!({
       :nova => {
