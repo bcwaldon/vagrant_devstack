@@ -1,6 +1,6 @@
 #
-# Cookbook Name:: anso
-# Recipe:: settings
+# Cookbook Name:: vagrant_devstack
+# Recipe:: default
 #
 # Copyright 2011, Anso Labs
 #
