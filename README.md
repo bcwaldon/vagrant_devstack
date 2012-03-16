@@ -15,12 +15,12 @@ NOTE: This project is intended to work with Vagrant v0.9.X
 ### Step 2: Check Out the Code
 Now would be a good time to actually check out the project :
 
-    git clone http://github.com/bcwaldon/vagrant_devstack
+    git clone http://github.com/bcwaldon/vagrant_devstack.git
 
 The project also requires a local copy of the `devstack_cookbooks` project. The suggested location for those is directly inside the vagrant\_devstack directory :
 
     cd vagrant_devstack
-    git clone http://github.com/bcwaldon/devstack_cookbooks
+    git clone http://github.com/bcwaldon/devstack_cookbooks.git
 
 ### Step 3: Set up a Box
 This project depends on having an Ubuntu 11.10 image (aka 'box') available in VirtualBox with the Guest Additions already installed. Run the following command to download a safe base box and make it availble under the name 'oneiric' :
