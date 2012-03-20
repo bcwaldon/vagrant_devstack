@@ -36,5 +36,5 @@ end
 execute "cd /home/#{u} && .dotfiles/link.sh || true" do
   user u
   group u
-  not_if { File.exists?("/home/#{u}/.vimrc") }
+  not_if { File.exists?("/home/#{u}/.bashrc") }
 end

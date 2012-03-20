@@ -17,6 +17,10 @@
 # limitations under the License.
 #
 
+include_recipe "apt"
+
+package 'rsync'
+
 d = node['cache']['dir']
 
-execute "cp -r /opt/stack/* #{d}/stack"
+execute "rsync -vur --delete --exclude=stack/nova-volumes-backing-file --exclude=stack/glance/images/* /opt/stack #{d}"

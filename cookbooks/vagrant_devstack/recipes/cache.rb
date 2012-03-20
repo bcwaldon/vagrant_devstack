@@ -17,6 +17,10 @@
 # limitations under the License.
 #
 
+include_recipe "apt"
+
+package 'rsync'
+
 d = node['cache']['dir']
 u = node['user']
 
@@ -26,10 +30,7 @@ execute "mkdir -p #{d}/pipcache; ln -s #{d}/pipcache /var/cache/pip" do
   not_if { File.directory?("/var/cache/pip") }
 end
 
-execute "mkdir -p #{d}/stack; cp -r #{d}/stack/* /opt/stack; chown -R #{u}:#{u} /opt/stack" do
-  only_if { File.directory?("#{d}/stack") }
-  not_if { File.directory?("/opt/stack") }
-end
+execute "mkdir -p #{d}/stack; rsync -vur --delete --exclude=stack/nova-volumes-backing-file --exclude=stack/glance/images/* #{d}/stack /opt; chown -R #{u}:#{u} /opt/stack"
 
 execute "ln -s /home/#{u}/.host-ssh/id_rsa /home/#{u}/.ssh/id_rsa" do
     user u
