@@ -1,0 +1,32 @@
+{
+  "recipes": {
+  },
+  "suggestions": {
+  },
+  "platforms": {
+  },
+  "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES: \n\n= USAGE:\n\n",
+  "conflicting": {
+  },
+  "description": "Anso openstack helper scripts",
+  "providing": {
+  },
+  "dependencies": {
+    "apt": [
+
+    ]
+  },
+  "maintainer": "Anso Labs",
+  "version": "0.1.0",
+  "attributes": {
+  },
+  "replacing": {
+  },
+  "maintainer_email": "support@ansolabs.com",
+  "groupings": {
+  },
+  "name": "anso",
+  "recommendations": {
+  },
+  "license": "Apache 2.0"
+}

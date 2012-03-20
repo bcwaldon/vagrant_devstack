@@ -1,2 +1,3 @@
+default[:user] = "vagrant"
 default[:cache][:dir] = "/home/vagrant/cache"
-default[:cache][:user] = "vagrant"
+default[:dotfiles][:repository] = "https://github.com/vishvananda/.dotfiles.git -b linux"

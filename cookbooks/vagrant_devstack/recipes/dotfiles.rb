@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: vagrant_devstack
-# Recipe:: default
+# Recipe:: dotfiles
 #
 # Copyright 2011, Anso Labs
 #
@@ -17,17 +17,24 @@
 # limitations under the License.
 #
 
-d = node['cache']['dir']
-u = node['cache']['user']
+include_recipe "apt"
 
-execute "rm -rf /var/cache/apt; mkdir -p #{d}/aptcache; ln -s #{d}/aptcache /var/cache/apt"
+package "bzr"
+package "git"
+package "vim-gtk"
+package "screen"
+package "tmux"
+package "exuberant-ctags"
 
-execute "mkdir -p #{d}/pipcache; ln -s #{d}/pipcache /var/cache/pip" do
-  not_if { File.directory?("/var/cache/pip") }
+u = node['user']
+execute "git clone #{node['dotfiles']['repository']} /home/#{u}/.dotfiles/" do
+  user u
+  group u
+  not_if { File.exists?("/home/#{u}/.dotfiles/") }
 end
 
-execute "mkdir -p #{d}/stack; ln -s #{d}/stack /opt/stack" do
-  only_if { File.directory?("#{d}/stack") }
-  not_if { File.directory?("/opt/stack") }
+execute "cd /home/#{u} && .dotfiles/link.sh || true" do
+  user u
+  group u
+  not_if { File.exists?("/home/#{u}/.vimrc") }
 end
-
