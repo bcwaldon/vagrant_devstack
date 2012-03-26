@@ -65,6 +65,7 @@ Vagrant::Config.run do |config|
       #"recipe[vagrant-openstack::dotfiles]",
     ]
     chef.json.merge!({
+      :my_ip => ip,
       :devstack => {
           :flat_interface => "eth1",
           :public_interface => "eth1",
