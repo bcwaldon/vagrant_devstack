@@ -57,6 +57,7 @@ Vagrant::Config.run do |config|
     chef.cookbooks_path = ["cookbooks"]
     chef.log_level = :debug
     chef.run_list = [
+      "recipe[vagrant-openstack::hostname]",
       "recipe[vagrant-openstack::cache]",
       "recipe[vagrant-openstack::devstack-cache]",
       "recipe[devstack]",
