@@ -3,8 +3,8 @@
 conf = {
     'ip_prefix' => '192.168.27',
     'mac_prefix' => '080027027',
-    'box_name' => 'devstack',
-    'box_url' => '/Users/vishvananda/vagrant/package.box',
+    'box_name' => 'precise',
+    'box_url' => 'http://c479942.r42.cf2.rackcdn.com/precise64.box',
     'allocate_memory' => 1024,
     'devstack_cookbooks_dir' => 'devstack_cookbooks/',
     'cache_dir' => 'cache/',
@@ -58,10 +58,11 @@ Vagrant::Config.run do |config|
     chef.cookbooks_path = ["#{cookbooks_dir}/cookbooks", "cookbooks"]
     chef.log_level = :debug
     chef.run_list = [
-      "recipe[vagrant_devstack::cache]",
+      "recipe[vagrant-openstack::cache]",
+      "recipe[vagrant-openstack::devstack-cache]",
       "recipe[devstack]",
-      "recipe[vagrant_devstack::update]",
-      "recipe[vagrant_devstack::dotfiles]",
+      "recipe[vagrant-openstack::devstack-update-cache]",
+      #"recipe[vagrant-openstack::dotfiles]",
     ]
     chef.json.merge!({
       :devstack => {
