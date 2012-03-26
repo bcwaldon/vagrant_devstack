@@ -3,8 +3,8 @@
 conf = {
     'ip_prefix' => '192.168.27',
     'mac_prefix' => '080027027',
-    'box_name' => 'precise',
-    'box_url' => 'http://c479942.r42.cf2.rackcdn.com/precise64.box',
+    'box_name' => 'devstack',
+    'box_url' => '/Users/vishvananda/vagrant/package.box',
     'allocate_memory' => 1024,
     'devstack_cookbooks_dir' => 'devstack_cookbooks/',
     'cache_dir' => 'cache/',
@@ -61,7 +61,7 @@ Vagrant::Config.run do |config|
       "recipe[vagrant_devstack::cache]",
       "recipe[devstack]",
       "recipe[vagrant_devstack::update]",
-      #"recipe[vagrant_devstack::dotfiles]",
+      "recipe[vagrant_devstack::dotfiles]",
     ]
     chef.json.merge!({
       :devstack => {

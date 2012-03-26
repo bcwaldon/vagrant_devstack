@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: vagrant_devstack
+# Cookbook Name:: vagrant-openstack
 # Recipe:: cache
 #
-# Copyright 2011, Anso Labs
+# Copyright (c) 2012, OpenStack, LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,8 +19,6 @@
 
 include_recipe "apt"
 
-package 'rsync'
-
 d = node['cache']['dir']
 u = node['user']
 
@@ -29,8 +27,6 @@ execute "rm -rf /var/cache/apt; mkdir -p #{d}/aptcache; ln -s #{d}/aptcache /var
 execute "mkdir -p #{d}/pipcache; ln -s #{d}/pipcache /var/cache/pip" do
   not_if { File.directory?("/var/cache/pip") }
 end
-
-execute "mkdir -p #{d}/stack; rsync -vur --delete --exclude=stack/nova-volumes-backing-file --exclude=stack/glance/images/* #{d}/stack /opt; chown -R #{u}:#{u} /opt/stack"
 
 execute "ln -s /home/#{u}/.host-ssh/id_rsa /home/#{u}/.ssh/id_rsa" do
     user u
