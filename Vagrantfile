@@ -6,7 +6,6 @@ conf = {
     'box_name' => 'precise',
     'box_url' => 'http://c479942.r42.cf2.rackcdn.com/precise64.box',
     'allocate_memory' => 1024,
-    'devstack_cookbooks_dir' => 'devstack_cookbooks/',
     'cache_dir' => 'cache/',
     'ssh_dir' => '~/.ssh/',
 }
@@ -55,7 +54,7 @@ Vagrant::Config.run do |config|
 
   cookbooks_dir = conf['devstack_cookbooks_dir']
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = ["#{cookbooks_dir}/cookbooks", "cookbooks"]
+    chef.cookbooks_path = ["cookbooks"]
     chef.log_level = :debug
     chef.run_list = [
       "recipe[vagrant-openstack::cache]",

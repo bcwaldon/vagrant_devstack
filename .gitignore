@@ -1,5 +1,4 @@
 etc/vagrant.yaml
 etc/localrc
 .vagrant
-cache
-openstack-cookbooks
+cache/*
