@@ -17,24 +17,15 @@ Now would be a good time to actually check out the project :
 
     git clone http://github.com/bcwaldon/vagrant_devstack.git
 
-The project also requires a local copy of the `devstack_cookbooks` project. The suggested location for those is directly inside the vagrant\_devstack directory :
+The project has submodules for other recipes:
 
-    cd vagrant_devstack
-    git clone http://github.com/bcwaldon/devstack_cookbooks.git
+    git submodule init
+    git submodule update
 
-### Step 3: Set up a Box
-This project depends on having an Ubuntu 11.10 image (aka 'box') available in VirtualBox with the Guest Additions already installed. Run the following command to download a safe base box and make it availble under the name 'oneiric' :
-
-    vagrant box add oneiric http://images.ansolabs.com/vagrant/oneiric64.box
-
-### Step 4: Configuration
+### Step 3: Configuration
 You can set up a local yaml-formatted config file to override the default settings used with the project. Place your config file at `etc/vagrant.yaml` or set a custom location in the environment variable `VD_CONF`. See a sample config at `etc/vagrant.yaml.sample`.
-
-If you decide to place the cookbooks you checked out in step 2 in a non-default location, you must configure the `devstack_cookbooks_dir` attribute to point to the proper directory.
-
-Additionally, if the box you wish to use has a different name than 'oneiric', make sure you set the `box_name` attribute in your config file.
 
 DevStack itself allows you to define a `localrc` file. This file is injected into your environment and sourced before the environment is built. You can use this to override settings such as `MYSQL_PASSWORD` or `NOVA_REPO`. See http://devstack.org for more information. If you decide to create your own localrc file, place it at `etc/localrc` file or set the `VD_LOCALRC` environment variable to its location.
 
-### Step 5: Execution
+### Step 4: Execution
 At this point you can run `vagrant up` and ssh into your DevStack environment!
