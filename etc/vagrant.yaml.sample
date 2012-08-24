@@ -2,7 +2,8 @@ box_name: precise
 allocate_memory: 1024
 
 ip_prefix: 192.168.27
-mac_prefix: 080027027
+# mac_prefix must be string 
+mac_prefix: '080027027'
 
 # These paths are all relative to the Vagrantfile
 cache_dir: cache/
