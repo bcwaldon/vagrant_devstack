@@ -8,6 +8,8 @@ conf = {
     'allocate_memory' => 1024,
     'cache_dir' => 'cache/',
     'ssh_dir' => '~/.ssh/',
+    'devstack_repo' => 'git://github.com/openstack-dev/devstack.git',
+    'devstack_branch' => 'master',
 }
 
 
@@ -71,7 +73,9 @@ Vagrant::Config.run do |config|
           :public_interface => "eth1",
           :floating_range => "#{ip_prefix}.128/28",
           :host_ip => ip,
-          :localrc => localrc
+          :localrc => localrc,
+          :repository => conf['devstack_repo'],
+          :branch => conf['devstack_branch']
       },
     })
   end
