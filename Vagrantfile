@@ -74,6 +74,7 @@ Vagrant::Config.run do |config|
           :public_interface => "eth1",
           :floating_range => "#{ip_prefix}.224/27",
           :branch => devstackbranch,
+          :instances_path => "/opt/stack/nova/instances", # This is super important till fix on the oficial repo here is the quick workaround if not deletes /home/vagrant/ in the midddle of the install
           :host_ip => ip,
           :localrc => localrc
       },
