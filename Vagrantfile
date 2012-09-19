@@ -2,7 +2,6 @@
 # Override these values with a local config defined in VD_CONF
 conf = {
     'ip_prefix' => '192.168.2',
-    'devstack_branch' => "master",
     'ip_suffix' => 100,
     'mac_prefix' => '080027002',
     'box_name' => 'precise64',
@@ -12,6 +11,8 @@ conf = {
     'ssh_dir' => '~/.ssh/',
     'devstack_floating_range' => '128/28',
     'devstack_cookbooks_dir' => 'cookbooks',
+    'devstack_repo' => 'git://github.com/openstack-dev/devstack.git',
+    'devstack_branch' => 'master',
 }
 
 
@@ -35,8 +36,7 @@ Vagrant::Config.run do |config|
 
   memory = conf['allocate_memory'].to_s()
   config.vm.customize ["modifyvm", :id, "--memory", memory]
-  devstackbranch = conf['devstack_branch'] 
-  config.vm.host_name = devstackbranch.split('/').last
+  config.vm.host_name = conf['devstack_branch'].split('/').last
 
   suffix = conf['ip_suffix']
 
@@ -79,10 +79,11 @@ Vagrant::Config.run do |config|
           :flat_interface => "eth1",
           :public_interface => "eth1",
           :floating_range => "#{ip_prefix}.#{range}",
-          :instances_path => "/opt/stack/nova/instances", # This is super important till fix on the oficial repo here is the quick workaround if not deletes /home/vagrant/ in the midddle of the install
-          :branch => devstackbranch,
+          :instances_path => "/home/vagrant/instances", # This is super important till fix on the oficial repo here is the quick workaround if not deletes /home/vagrant/ in the midddle of the install
           :host_ip => ip,
           :localrc => localrc
+          :repository => conf['devstack_repo'],
+          :branch => conf['devstack_branch']
       },
     })
   end
