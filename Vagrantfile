@@ -1,14 +1,17 @@
 
 # Override these values with a local config defined in VD_CONF
-devstackbranch = "master"
 conf = {
     'ip_prefix' => '192.168.2',
+    'devstack_branch' => "master",
+    'ip_suffix' => 100,
     'mac_prefix' => '080027002',
     'box_name' => 'precise64',
     'box_url' => 'http://files.vagrantup.com/precise32.box',
-    'allocate_memory' => 1024,
+    'allocate_memory' => 1024, 
     'cache_dir' => 'cache/',
     'ssh_dir' => '~/.ssh/',
+    'devstack_floating_range' => '128/28',
+    'devstack_cookbooks_dir' => 'cookbooks',
 }
 
 
@@ -32,12 +35,14 @@ Vagrant::Config.run do |config|
 
   memory = conf['allocate_memory'].to_s()
   config.vm.customize ["modifyvm", :id, "--memory", memory]
+  devstackbranch = conf['devstack_branch'] 
   config.vm.host_name = devstackbranch.split('/').last
 
-  suffix = "100"
+  suffix = conf['ip_suffix']
 
   ip_prefix = conf['ip_prefix']
   ip = "#{ip_prefix}.#{suffix}"
+  range = conf['devstack_floating_range']
 
   mac_prefix = conf['mac_prefix']
   mac = "#{mac_prefix}#{suffix}"
@@ -53,11 +58,12 @@ Vagrant::Config.run do |config|
   ssh_dir = conf['ssh_dir']
   config.vm.share_folder("v-ssh", "/home/vagrant/.host-ssh", ssh_dir)
 
-  config.vm.forward_port 80, 8080 
+  port_fwd = (8000 + suffix)
+  config.vm.forward_port 80, port_fwd 
 
   cookbooks_dir = conf['devstack_cookbooks_dir']
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = ["cookbooks"]
+    chef.cookbooks_path = cookbooks_dir
     chef.log_level = :debug
     chef.run_list = [
       "recipe[vagrant-openstack::hostname]",
@@ -72,9 +78,9 @@ Vagrant::Config.run do |config|
       :devstack => {
           :flat_interface => "eth1",
           :public_interface => "eth1",
-          :floating_range => "#{ip_prefix}.224/27",
-          :branch => devstackbranch,
+          :floating_range => "#{ip_prefix}.#{range}",
           :instances_path => "/opt/stack/nova/instances", # This is super important till fix on the oficial repo here is the quick workaround if not deletes /home/vagrant/ in the midddle of the install
+          :branch => devstackbranch,
           :host_ip => ip,
           :localrc => localrc
       },
