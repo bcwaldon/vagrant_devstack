@@ -1,10 +1,11 @@
 
 # Override these values with a local config defined in VD_CONF
+devstackbranch = "master"
 conf = {
-    'ip_prefix' => '192.168.27',
-    'mac_prefix' => '080027027',
-    'box_name' => 'precise',
-    'box_url' => 'http://c479942.r42.cf2.rackcdn.com/precise64.box',
+    'ip_prefix' => '192.168.2',
+    'mac_prefix' => '080027002',
+    'box_name' => 'precise64',
+    'box_url' => 'http://files.vagrantup.com/precise32.box',
     'allocate_memory' => 1024,
     'cache_dir' => 'cache/',
     'ssh_dir' => '~/.ssh/',
@@ -28,12 +29,12 @@ else
 end
 
 Vagrant::Config.run do |config|
-
   config.vm.box = conf['box_name']
   config.vm.box_url = conf['box_url']
 
   memory = conf['allocate_memory'].to_s()
   config.vm.customize ["modifyvm", :id, "--memory", memory]
+  config.vm.host_name = devstackbranch.split('/').last
 
   suffix = "100"
 
@@ -54,6 +55,8 @@ Vagrant::Config.run do |config|
   ssh_dir = conf['ssh_dir']
   config.vm.share_folder("v-ssh", "/home/vagrant/.host-ssh", ssh_dir)
 
+  config.vm.forward_port 80, 8080 
+
   cookbooks_dir = conf['devstack_cookbooks_dir']
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ["cookbooks"]
@@ -71,7 +74,8 @@ Vagrant::Config.run do |config|
       :devstack => {
           :flat_interface => "eth1",
           :public_interface => "eth1",
-          :floating_range => "#{ip_prefix}.128/28",
+          :floating_range => "#{ip_prefix}.224/27",
+          :branch => devstackbranch,
           :host_ip => ip,
           :localrc => localrc,
           :repository => conf['devstack_repo'],
