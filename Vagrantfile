@@ -72,6 +72,7 @@ Vagrant::Config.run do |config|
           :flat_interface => "eth1",
           :public_interface => "eth1",
           :floating_range => "#{ip_prefix}.128/28",
+          :instances_path => "/home/vagrant/instances", # Quick workaround, for stack.sh cleanup for instances causing deletion of /home/vagrant/ in the midddle of the install
           :host_ip => ip,
           :localrc => localrc,
           :repository => conf['devstack_repo'],
