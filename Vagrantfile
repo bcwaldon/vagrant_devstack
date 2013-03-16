@@ -10,7 +10,6 @@ conf = {
     'ssh_dir' => '~/.ssh/',
     'devstack_repo' => 'git://github.com/openstack-dev/devstack.git',
     'devstack_branch' => 'master',
-    'num_cpus' => 2,
 }
 
 
@@ -36,8 +35,10 @@ Vagrant::Config.run do |config|
   memory = conf['allocate_memory'].to_s()
   config.vm.customize ["modifyvm", :id, "--memory", memory]
 
-  n_cpus = conf['num_cpus'].to_s()
-  config.vm.customize ["modifyvm", :id, "--cpus", n_cpus]
+  n_cpus = conf['num_cpus']
+  if ! n_cpus.nil?
+    config.vm.customize ["modifyvm", :id, "--cpus", n_cpus.to_s()]
+  end
 
   suffix = "100"
 
