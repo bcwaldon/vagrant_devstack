@@ -35,6 +35,11 @@ Vagrant::Config.run do |config|
   memory = conf['allocate_memory'].to_s()
   config.vm.customize ["modifyvm", :id, "--memory", memory]
 
+  n_cpus = conf['num_cpus']
+  if ! n_cpus.nil?
+    config.vm.customize ["modifyvm", :id, "--cpus", n_cpus.to_s()]
+  end
+
   suffix = "100"
 
   ip_prefix = conf['ip_prefix']

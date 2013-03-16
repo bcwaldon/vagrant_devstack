@@ -1,5 +1,6 @@
 box_name: precise
 allocate_memory: 1024
+num_cpus: 2
 
 ip_prefix: 192.168.27
 mac_prefix: 080027027
