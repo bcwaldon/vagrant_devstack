@@ -1,6 +1,6 @@
 etc/vagrant.yaml
 etc/localrc
-.vagrant
+.vagrant*
 cache/*
 .ruby-version
 .ruby-gemset
