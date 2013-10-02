@@ -48,13 +48,10 @@ Vagrant::Config.run do |config|
   mac_prefix = conf['mac_prefix']
   mac = "#{mac_prefix}#{suffix}"
 
-  Vagrant::Config.run do |config|
-    config.vm.network(:hostonly, ip, :mac => mac)
-  end
+  config.vm.network(:hostonly, ip, :mac => mac)
 
   cache_dir = conf['cache_dir']
-  config.vm.share_folder("v-cache", "/home/vagrant/cache", cache_dir,
-                         :nfs => true)
+  config.vm.share_folder("v-cache", "/home/vagrant/cache", cache_dir, nfs: true)
 
   ssh_dir = conf['ssh_dir']
   config.vm.share_folder("v-ssh", "/home/vagrant/.host-ssh", ssh_dir)
