@@ -27,17 +27,21 @@ else
     localrc = ''
 end
 
-Vagrant::Config.run do |config|
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
 
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = conf['box_name']
   config.vm.box_url = conf['box_url']
 
-  memory = conf['allocate_memory'].to_s()
-  config.vm.customize ["modifyvm", :id, "--memory", memory]
+  config.vm.provider :virtualbox do |v|
+    v.name = conf['box_name']
 
-  n_cpus = conf['num_cpus']
-  if ! n_cpus.nil?
-    config.vm.customize ["modifyvm", :id, "--cpus", n_cpus.to_s()]
+    memory = conf['allocate_memory'].to_s()
+    v.customize ["modifyvm", :id, "--memory", memory]
+
+    n_cpus = conf['num_cpus']
+    v.customize ["modifyvm", :id, "--cpus", n_cpus.to_s()] if ! n_cpus.nil?
   end
 
   suffix = "100"
@@ -48,13 +52,13 @@ Vagrant::Config.run do |config|
   mac_prefix = conf['mac_prefix']
   mac = "#{mac_prefix}#{suffix}"
 
-  config.vm.network(:hostonly, ip, :mac => mac)
+  config.vm.network :private_network, ip: ip, mac: mac
 
   cache_dir = conf['cache_dir']
-  config.vm.share_folder("v-cache", "/home/vagrant/cache", cache_dir, nfs: true)
-
+  config.vm.synced_folder(cache_dir, "/home/vagrant/cache", id: "v-cache", create: true, nfs: true)
+  
   ssh_dir = conf['ssh_dir']
-  config.vm.share_folder("v-ssh", "/home/vagrant/.host-ssh", ssh_dir)
+  config.vm.synced_folder(ssh_dir, "/home/vagrant/.host-ssh", id: "v-ssh", create: true)
 
   cookbooks_dir = conf['devstack_cookbooks_dir']
   config.vm.provision :chef_solo do |chef|
