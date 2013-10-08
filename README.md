@@ -5,9 +5,9 @@ Vagrant uses VirtualBox to handle creation of the actual virtual machines. Head 
 
 If you're running Mac OS X, you must also install Xcode. Users running Lion can can install Xcode through the App Store. You can also grab the installer from [http://developer.apple.com/xcode/](http://developer.apple.com/xcode/).
 
-Once you've got VirtualBox and Xcode installed, you're ready to install Vagrant. The [official recomentation](http://docs.vagrantup.com/v2/installation/index.html) is to install Vagrant using builds from [http://downloads.vagrantup.com/](http://downloads.vagrantup.com/), so grab the latest and install it.
+Once you've got VirtualBox and Xcode installed, you're ready to install Vagrant. The [official recommendation](http://docs.vagrantup.com/v2/installation/index.html) is to install Vagrant using builds from [http://downloads.vagrantup.com/](http://downloads.vagrantup.com/), so grab the latest and install it.
 
-Also you'll probably need to install [NFS](http://en.wikipedia.org/wiki/Network_File_System) on your computer to work with this project. Mac OS X has it by default, but running on Linux will require ```nfs-kernel-server``` instalation.
+Also you'll probably need to install [NFS](http://en.wikipedia.org/wiki/Network_File_System) on your computer to work with this project. Mac OS X has it by default, but running on Linux will require ```nfs-kernel-server``` installation.
 
 NOTE: This project is intended to work with Vagrant v1.3.2
 
