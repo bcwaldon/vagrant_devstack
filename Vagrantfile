@@ -30,6 +30,13 @@ end
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
+vd_localconf = ENV.fetch('VD_LOCALCONF', 'etc/local.conf')
+if File.exist?(vd_localconf)
+    localconf = IO.read(vd_localconf)
+else
+    localconf = ''
+end
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = conf['box_name']
   config.vm.box_url = conf['box_url']
@@ -81,6 +88,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           :instances_path => "/home/vagrant/instances", # Quick workaround, for stack.sh cleanup for instances causing deletion of /home/vagrant/ in the midddle of the install
           :host_ip => ip,
           :localrc => localrc,
+          :localconf => localconf,
           :repository => conf['devstack_repo'],
           :branch => conf['devstack_branch']
       },

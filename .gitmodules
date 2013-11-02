@@ -1,6 +1,6 @@
 [submodule "cookbooks/devstack"]
 	path = cookbooks/devstack
-	url = git://github.com/osops/devstack.git
+	url = git://github.com/sc68cal/devstack.git
 [submodule "cookbooks/vagrant-openstack"]
 	path = cookbooks/vagrant-openstack
 	url = git://github.com/osops/vagrant-openstack.git
