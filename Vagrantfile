@@ -2,7 +2,6 @@
 # Override these values with a local config defined in VD_CONF
 conf = {
     'ip_prefix' => '192.168.27',
-    'mac_prefix' => '080027027',
     'box_name' => 'precise',
     'box_url' => 'http://files.vagrantup.com/precise64.box',
     'allocate_memory' => 1024,
@@ -30,6 +29,13 @@ end
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
+vd_localconf = ENV.fetch('VD_LOCALCONF', 'etc/local.conf')
+if File.exist?(vd_localconf)
+    localconf = IO.read(vd_localconf)
+else
+    localconf = ''
+end
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = conf['box_name']
   config.vm.box_url = conf['box_url']
@@ -42,17 +48,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     n_cpus = conf['num_cpus']
     v.customize ["modifyvm", :id, "--cpus", n_cpus.to_s()] if ! n_cpus.nil?
+    v.customize ["modifyvm", :id, "--nicpromisc3", "allow-all"]
   end
 
-  suffix = "100"
-
   ip_prefix = conf['ip_prefix']
-  ip = "#{ip_prefix}.#{suffix}"
+  ip = "192.168.33.2"
 
-  mac_prefix = conf['mac_prefix']
-  mac = "#{mac_prefix}#{suffix}"
-
-  config.vm.network :private_network, ip: ip, mac: mac
+  # Management network
+  config.vm.network :private_network, ip:ip
+  # VM network
+  config.vm.network :private_network, ip:"#{ip_prefix}.2"
 
   cache_dir = conf['cache_dir']
   config.vm.synced_folder(cache_dir, "/home/vagrant/cache", id: "v-cache", create: true, nfs: true)
@@ -75,13 +80,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.json.merge!({
       :my_ip => ip,
       :devstack => {
-          :flat_interface => "eth1",
-          :public_interface => "eth1",
-          :floating_range => "#{ip_prefix}.128/28",
+          :flat_interface => "eth2",
+          :public_interface => "eth2",
+          :floating_range => "#{ip_prefix}.0/24",
           :instances_path => "/home/vagrant/instances", # Quick workaround, for stack.sh cleanup for instances causing deletion of /home/vagrant/ in the midddle of the install
           :host_ip => ip,
           :localrc => localrc,
+          :localconf => localconf,
           :repository => conf['devstack_repo'],
+          :gateway_ip => "#{ip_prefix}.2",
           :branch => conf['devstack_branch']
       },
     })
