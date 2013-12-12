@@ -60,7 +60,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :private_network, ip:"#{ip_prefix}.2"
 
   cache_dir = conf['cache_dir']
-  config.vm.synced_folder(cache_dir, "/home/vagrant/cache", id: "v-cache", create: true, nfs: true)
+  config.vm.synced_folder(cache_dir, "/home/vagrant/cache", id: "v-cache", create: true)
   
   ssh_dir = conf['ssh_dir']
   config.vm.synced_folder(ssh_dir, "/home/vagrant/.host-ssh", id: "v-ssh", create: true)
