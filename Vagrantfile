@@ -2,8 +2,8 @@
 # Override these values with a local config defined in VD_CONF
 conf = {
     'ip_prefix' => '192.168.27',
-    'box_name' => 'precise',
-    'box_url' => 'http://files.vagrantup.com/precise64.box',
+    'box_name' => 'trusty',
+    'box_url' => 'https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box',
     'allocate_memory' => 1024,
     'cache_dir' => 'cache/',
     'ssh_dir' => '~/.ssh/',
