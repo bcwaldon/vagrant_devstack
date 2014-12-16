@@ -19,13 +19,6 @@ if File.exist?(vd_conf)
     conf.update(user_conf)
 end
 
-vd_localrc = ENV.fetch('VD_LOCALRC', 'etc/localrc')
-if File.exist?(vd_localrc)
-    localrc = IO.read(vd_localrc)
-else
-    localrc = ''
-end
-
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
@@ -88,7 +81,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           :floating_range => "#{ip_prefix}.0/24",
           :instances_path => "/home/vagrant/instances", # Quick workaround, for stack.sh cleanup for instances causing deletion of /home/vagrant/ in the midddle of the install
           :host_ip => ip,
-          :localrc => localrc,
           :localconf => localconf,
           :repository => conf['devstack_repo'],
           :gateway_ip => "#{ip_prefix}.2",
