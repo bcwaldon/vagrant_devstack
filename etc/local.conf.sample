@@ -1,12 +1,2 @@
 # The chef template inserts [[local|localrc]] at the top of the file
 # see https://github.com/sc68cal/chef-devstack/blob/master/templates/default/local.conf.erb
-
-MYSQL_PASSWORD=secrete
-SERVICE_TOKEN=secrete
-ADMIN_PASSWORD=secrete
-SERVICE_TOKEN=secrete
-
-FLAT_INTERFACE=eth1
-PUBLIC_INTERFACE=eth1
-HOST_IP=192.168.33.2
-FLOATING_RANGE=192.168.27.128/28
