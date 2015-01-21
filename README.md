@@ -24,7 +24,7 @@ The project has submodules for other recipes:
 ### Step 3: Configuration
 You can set up a local yaml-formatted config file to override the default settings used with the project. Place your config file at `etc/vagrant.yaml` or set a custom location in the environment variable `VD_CONF`. See a sample config at `etc/vagrant.yaml.sample`.
 
-DevStack itself allows you to define a `local.conf` file. This file is injected into your environment and sourced before the environment is built. You can use this to override settings such as `MYSQL_PASSWORD` or `NOVA_REPO`. See http://devstack.org for more information. If you decide to create your own localrc file, place it at `etc/local.conf` file or set the `VD_LOCALCONF` environment variable to its location.
+DevStack itself allows you to define a `local.conf` file. This file is injected into your environment and sourced before the environment is built. You can use this to override settings such as `MYSQL_PASSWORD` or `NOVA_REPO`. See http://devstack.org for more information. If you decide to create your own `local.conf` file, place it at `etc/local.conf` file or set the `VD_LOCALCONF` environment variable to its location.
 
 ### Step 4: Execution
 At this point you can run `vagrant up` and ssh into your DevStack environment!
