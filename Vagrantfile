@@ -63,6 +63,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   cookbooks_dir = conf['devstack_cookbooks_dir']
   config.vm.provision :chef_solo do |chef|
+    chef.arguments = "--chef-license accept" 
     chef.cookbooks_path = ["cookbooks"]
     chef.log_level = :debug
     chef.run_list = [
